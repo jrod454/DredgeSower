@@ -1,10 +1,28 @@
 
 <input type="file" (change)="setFile($event)">
+<br/>
 
+<select [(ngModel)]="selectedClass" (ngModelChange)="updateTable()">
+  <option *ngFor="let c of distinctClass" [value]="c">{{c}}</option>
+</select>
+<select [(ngModel)]="selectedWeight" (ngModelChange)="updateTable()">
+  <option *ngFor="let w of distinctWeight" [value]="w">{{w}}</option>
+</select>
+<select [(ngModel)]="selectedBelt" (ngModelChange)="updateTable()">
+  <option *ngFor="let b of distinctBelt" [value]="b">{{b}}</option>
+</select>
+<p>
+{{selectedClass}} {{selectedWeight}} {{selectedBelt}}
+</p>
 <table>
   <tr *ngFor="let row of rows">
+    <td>{{row[0]}}</td>
+    <td>{{row[1]}}</td>
+    <td>{{row[2]}}</td>
     <td>{{row[3]}}</td>
-    <td>{{row[5]}}</td>
+    <td>{{row[4]}}</td>
+    <td>{{row[13]}}</td>
+    <td>{{row[17]}}</td>
   </tr>
 </table>
 

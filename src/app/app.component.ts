@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import * as Papa from "node_modules/papaparse";
-import {p} from "@angular/core/src/render3";
 
 @Component({
   selector: 'app-root',
@@ -10,6 +9,14 @@ import {p} from "@angular/core/src/render3";
 export class AppComponent {
   title = 'DredgeSower';
   raw_data_file: any;
+  raw_rows = [];
+  distinctClass = [];
+  distinctWeight = [];
+  distinctBelt = [];
+
+  selectedClass = "";
+  selectedWeight = "";
+  selectedBelt = "";
 
   rows = [];
 
@@ -21,15 +28,29 @@ export class AppComponent {
     Papa.parse(this.raw_data_file, {
       complete: (data) => {
         console.log(data.data);
-        data.data.forEach(person => {
-          if (person[0] !== null) {
-            this.rows.push([...person.slice(0,5), person[17]]);
-          }
-        });
-        this.rows = [...this.rows];
-        console.log(this.rows[6]);
+        this.raw_rows = [...data.data.slice(5, data.data.length - 1)];
+        this.distinctClass = [...new Set(this.raw_rows.map(row => row[0].trim().toLowerCase()))];
+        this.distinctWeight = [...new Set(this.raw_rows.map(row => row[1].trim().toLowerCase()))];
+        this.distinctBelt = [...new Set(this.raw_rows.map(row => row[2].trim().toLowerCase()))];
+        this.rows = this.raw_rows;
       }
     });
+  };
+
+  updateTable = () => {
+    this.rows = this.raw_rows.filter(row => {
+      let currentClass = row[0].trim().toLowerCase();
+      let currentWeight = row[1].trim().toLowerCase();
+      let currentBelt = row[2].trim().toLowerCase();
+      return currentClass === this.selectedClass &&
+        currentWeight === this.selectedWeight &&
+        currentBelt === this.selectedBelt
+    });
+    this.rows.sort(((a, b) => b[17] - a[17]));
+  };
+
+  updateClass = () => {
+
   };
 
   sum = (total, number) => {
