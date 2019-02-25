@@ -21,6 +21,11 @@
     "@angular/platform-browser-dynamic": "^6.1.0",
     "@angular/router": "^6.1.0",
     "core-js": "^2.5.4",
+    "docx-merger": "^1.2.2",
+    "docxtemplater": "^3.9.9",
+    "file-saver": "^2.0.1",
+    "jszip": "^2.6.1",
+    "jszip-utils": "0.0.2",
     "papaparse": "^4.6.3",
     "rxjs": "~6.2.0",
     "zone.js": "~0.8.26"

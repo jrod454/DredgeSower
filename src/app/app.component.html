@@ -1,6 +1,7 @@
 
 <input type="file" (change)="setFile($event)">
 <br/>
+<button (click)="shutdown()">Hello</button>
 
 <select [(ngModel)]="selectedClass" (ngModelChange)="updateTable()">
   <option *ngFor="let c of distinctClass" [value]="c">{{c}}</option>
@@ -14,6 +15,7 @@
 <p>
 {{selectedClass}} {{selectedWeight}} {{selectedBelt}}
 </p>
+<!--<iframe [src]="iframeSrc"></iframe>-->
 <table>
   <tr *ngFor="let row of rows">
     <td>{{row[0]}}</td>
